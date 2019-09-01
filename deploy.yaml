@@ -1,0 +1,37 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: my-socket-node-deployment
+  labels:
+    app: the-node-js-socket
+spec:
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: the-node-js-socket
+    spec:
+      containers:
+        - image: node-socket
+          name: node-socket-main-container
+          resources:
+            requests:
+              memory: "100Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          env:
+          - name:  REDIS_DB
+            value:  my-redis-service       
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: Never
+
+
+
+

@@ -1,0 +1,11 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-perfect-service
+spec:
+  selector:
+    app: the-node-js-socket
+  type: LoadBalancer
+  ports:
+    - name: name-of-the-port
+      port: 3000
